@@ -31,7 +31,6 @@ public class aspiradora {
         
         //PUNTO 1
         //Incializamos las variables relativas a las dependencias
-        
         for (int i = 0; i < dependencias.length; i++) {
             do{
                 teclado = JOptionPane.showInputDialog(null, "Introduzca los "
@@ -59,10 +58,20 @@ public class aspiradora {
                 limpias[i] = false;
                 System.out.println("NO se ha limpiado la habitación: " + i);
             } 
+            
         }
+        String limpio = "";
+        String noLimpio = "";
+        for (int i = 0; i < limpias.length; i++) {
+            if(limpias[i]){
+                limpio += i + " ";
+            }else{
+                noLimpio += i + " ";
+            }
+        }
+        JOptionPane.showMessageDialog(null,"Las dependencias limpiadas son: " + limpio);
+        JOptionPane.showMessageDialog(null,"Las dependencias NO limpiadas son: " + noLimpio);
         
-        JOptionPane.showMessageDialog(null, "Se han limpiado las "
-                    + "habitaciones: ");
         
         //Usar booleanos para las dependencias limpiadas
         //En base de carga solo poner 100%
