@@ -14,26 +14,26 @@ import javax.swing.JOptionPane;
 
 public class aspiradora {
 
-    //Declaramos las variables que vayamos a usar
+    //Variables
     static double bateria;
     static String teclado;
     static int posicionAspiradora; 
-    static String uPredeterminado = "usuario", cPredeterminada = "usuario";
-    static double dependencias[];
+    static String uPredeterminado = "usuario", //Usuario predeterminado
+            cPredeterminada = "usuario"; //Contraseña predeterminada
+    //Array para guardar los metros cuadrados de cada dependencia
+    static double dependencias[]; 
 
     public static void main(String[] args) {
 
         inicioSesion();
         menu();
-
-        //PUNTO 7
-        //Salir
     }
 
     //Metedo para iniciar sesion en sistema
     public static void inicioSesion() {
-
+        //Variables
         String usuario, contrasenia;
+        //Proceso
         do {
             usuario = JOptionPane.showInputDialog(null, "Introduzca el "
                     + "usuario");
@@ -45,7 +45,9 @@ public class aspiradora {
     
     //Metodo que meuestra el menú con las diferenctes opciones
     public static void menu() {
-        int seleccion;
+        //Variables
+        int seleccion;//Variable que se encarga de guardar la selección del menú
+        //Proceso
         do {
             teclado = JOptionPane.showInputDialog(null, "Introduzca la opción "
                     + "deseada:\n"
@@ -88,13 +90,13 @@ public class aspiradora {
 
     //Metodo que configura el sistema (dependencias y metros^2 de cada una)
     public static void configuracionSistema() {
-        //Declaración de array para dependencias.
+        //Varaibles
+        //Inicialización de array para dependencias.
         teclado = JOptionPane.showInputDialog(null, "Introduzca la cantidad "
                 + "de dependencias");
         dependencias = new double[Integer.parseInt(teclado)];
 
-        //PUNTO 1
-        //Incializamos las variables relativas a las dependencias
+        //Incializamos las variables relativas a las dependencias, los metros^2
         for (int i = 0; i < dependencias.length; i++) {
             do {
                 teclado = JOptionPane.showInputDialog(null, "Introduzca los "
@@ -112,9 +114,12 @@ public class aspiradora {
     }
 
     //Metodo para selección del modo de limpieza (incluye aspiración solo
-    //y asparación junto con fregado
+    //y asparación junto con fregado)
     public static void seleccionModo() {
-        int modo;
+        //Variables
+        int modo;//Variable que nos guarda el modo seleccionado
+        //Proceso
+        //Nos aseguramos que estén inicializadas las variables necesarias.
         teclado = JOptionPane.showInputDialog(null, "¿Ha realizado con "
                 + "anterioridad la configuración del sistema y"
                 + " ha establecido la carga?");
@@ -127,19 +132,29 @@ public class aspiradora {
                     + "\n4 - Aspiración y Fregado en Modo Dependencias");
                 modo = Integer.parseInt(teclado);
             } while (modo < 1 || modo > 4);
-            //Array que usaremos para los los siguientes metodos
+            //Arrays que usaremos para los los siguientes metodos
+            //Array que se encarga de guardar si las dependencias están limpias
             boolean limpias[] = new boolean[dependencias.length];
+            /*
+                Array que se encarga de guardar la batería que consume cada
+                dependencia
+            */
             double bateriaDependencia[] = new double[dependencias.length];
             //Variables a usar
-            final double BATERIA;
-            
-            //Estructura que se encarga de inicializar la constante bateria
-            //según si es modo aspiración o aspiració y fregado
+            //Se encarga de guardar el consumo de batería por metro^2
+            final double BATERIA; 
+            /*
+                Estructura que se encarga de inicializar la constante bateria
+                según si es modo aspiración o aspiración y fregado
+            */
             if (modo == 1 || modo == 2) {
+                //Para el modo solo aspiración
                 BATERIA = 1.5;
             } else {
+                //Para el modo aspiración y fregado
                 BATERIA = 2.25;
             }
+            //Estructura que nos desplaza al modo seleccionado
             switch (modo) {
                 //PUNTO 3
                 case 1:
@@ -157,6 +172,10 @@ public class aspiradora {
                     break;
             }
         }else{
+            /*
+                En caso de no estar inicializadas las necesarias se pide que 
+                vayan a esa parte del menú
+            */
             JOptionPane.showMessageDialog(null, "Vaya primero a 'configuración "
                     + "sistema' y posteriormente a 'Establecer carga'");
         }
@@ -165,13 +184,18 @@ public class aspiradora {
     //Metodo que se encarga del Modo Completo
     public static void modoCompleto( double bateriaDependencia[],
             boolean limpias[], double BATERIA) {
-        
+        //Proceso
         for (int i = 0; i < bateriaDependencia.length; i++) {
+            /*
+                Inicializamos el array que nos muestra el consumo de batería 
+                por dependencia
+            */
             bateriaDependencia[i] = dependencias[i] * BATERIA;
+            //Vamos al metodo que se encarga de la descarga de batería
             descargarBateria(i, bateriaDependencia, limpias);
         }
-        String limpio = "";
-        String noLimpio = "";
+        String limpio = ""; //Guardamos las dependencias que han sido limpiadas
+        String noLimpio = ""; //Guardamos las que no por falta de batería
         for (int i = 0; i < limpias.length; i++) {
             if (limpias[i]) {
                 limpio += "dependecia " + i + " ";
@@ -179,6 +203,7 @@ public class aspiradora {
                 noLimpio += "dependecia " + i + " ";
             }
         }
+        //Mostramos el resultado del modo Completo
         JOptionPane.showMessageDialog(null, "Las dependencias limpiadas son: " + limpio);
         JOptionPane.showMessageDialog(null, "Las dependencias NO limpiadas son: " + noLimpio);
     }
@@ -186,24 +211,35 @@ public class aspiradora {
     //Metodo que se encarga del Modo Dependencias
     public static void modoDependencias(double bateriaDependencia[],
             boolean limpias[], double BATERIA) {
-        //Variables a usar
-        int pendienteLimpiar;
+        //Variables
+        /*
+            En la siguiente variable guardamos:
+            1º si se quiere limpiar una dependencia
+            2º la dependencia a limpiar
+        */
+        int pendienteLimpiar; 
+        /*
+                Inicializamos el array que nos muestra el consumo de batería 
+                por dependencia
+        */
         for (int i = 0; i < bateriaDependencia.length; i++) {
             bateriaDependencia[i] = dependencias[i] * BATERIA;
         }
+        //Proceso
         do {
             do {
-                teclado = JOptionPane.showInputDialog(null, "¿Desea limpiar alguna "
-                        + "habitación? \nIntroduzca:\n1 - Sí\n2 - No");
+                teclado = JOptionPane.showInputDialog(null, "¿Desea limpiar "
+                        + "alguna habitación? \nIntroduzca:\n1 - Sí\n2 - No");
                 pendienteLimpiar = Integer.parseInt(teclado);
             } while (pendienteLimpiar != 1 && pendienteLimpiar != 2);
 
             if (pendienteLimpiar == 1) {
                 do {
-                    teclado = JOptionPane.showInputDialog(null, "Introduzca el número "
-                            + "de habitación a limpiar");
+                    teclado = JOptionPane.showInputDialog(null, "Introduzca el"
+                            + " número de habitación a limpiar");
                     pendienteLimpiar = Integer.parseInt(teclado);
                 } while (pendienteLimpiar > dependencias.length || pendienteLimpiar < 0);
+                //Vamos al metodo que se encarga de la descarga de batería
                 descargarBateria(pendienteLimpiar, bateriaDependencia, limpias);
             }
         } while (pendienteLimpiar != 2);
@@ -213,7 +249,7 @@ public class aspiradora {
     //en modo dependencia
     public static void descargarBateria(int hab, double bateriaDependencia[],
             boolean limpias[]){
-        
+        //Proceso
         if (bateria > bateriaDependencia[hab] && bateria > 3) {
                 bateria -= bateriaDependencia[hab];
                 limpias[hab] = true;
@@ -228,14 +264,15 @@ public class aspiradora {
     
     //Método que muestra el estado general de las aspiradora
     public static void estadoGeneral() {
-        //PUNTO 5
+        //Variables
+        //Variables para día y hora
         LocalDateTime localDateTime = LocalDateTime.now();
         double metros = 0;
-
+        //Suma de los metros de la casa
         for (int i = 0; i < dependencias.length; i++) {
             metros += dependencias[i];
         }
-
+        //Proceso
         String estadoGeneral = "La hora y fecha de hoy es: " + localDateTime
                 + "\nEl nivel de batería es: " + bateria + "\nEl lugar donde se "
                 + "encuentra es la habitacion " + posicionAspiradora
@@ -246,8 +283,9 @@ public class aspiradora {
 
     //Metodo que se encarga de llevar la aspiradora a la base de carga
     public static void cargaBateria() {
-        //PUNTO 6
+        //Variables
         bateria = 100;
+        //Proceso
         JOptionPane.showMessageDialog(null, "Cargando... Batería cargada.");
     }
 }
