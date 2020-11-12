@@ -21,49 +21,56 @@ public class aspiradora {
         // TODO code application logic here
         
         //Declaramos las variables que vayamos a usar
-        double mSalon, mCocina, mBanio, mDormitorio1, mDormitorio2, bateria;
+        double bateria;
         String teclado;
+        
+        //Declaración de array para dependencias.
+        teclado = JOptionPane.showInputDialog(null,"Introduzca la cantidad "
+                + "de dependencias");
+        double dependencias[] = new double[Integer.parseInt(teclado)];
         
         //PUNTO 1
         //Incializamos las variables relativas a las dependencias
-        do{
-            teclado = JOptionPane.showInputDialog(null, "Introduzca los metros"
-                    + " cuadrados que tiene el Salón.");
-            mSalon = Double.parseDouble(teclado);
-        }while(mSalon < 1 || mSalon > 100);
         
-        do{
-            teclado = JOptionPane.showInputDialog(null, "Introduzca los metros"
-                    + " cuadrados que tiene la Cocina.");
-            mCocina = Double.parseDouble(teclado);
-        }while(mCocina < 1 || mCocina > 100);
-        
-        do{
-            teclado = JOptionPane.showInputDialog(null, "Introduzca los metros"
-                    + " cuadrados que tiene el Baño.");
-            mBanio = Double.parseDouble(teclado);
-        }while(mBanio < 1 || mBanio > 100);
-        
-        do{
-            teclado = JOptionPane.showInputDialog(null, "Introduzca los metros"
-                    + " cuadrados que tiene el Dormitorio1.");
-            mDormitorio1 = Double.parseDouble(teclado);
-        }while(mDormitorio1 < 1 || mDormitorio1 > 100);
-        
-        do{
-            teclado = JOptionPane.showInputDialog(null, "Introduzca los metros"
-                    + " cuadrados que tiene el Dormitorio2.");
-            mDormitorio2 = Double.parseDouble(teclado);
-        }while(mDormitorio2 < 1 || mDormitorio2 > 100);
+        for (int i = 0; i < dependencias.length; i++) {
+            do{
+                teclado = JOptionPane.showInputDialog(null, "Introduzca los "
+                    + "metros cuadrados que tiene la dependencia " + i);
+            dependencias[i] = Integer.parseInt(teclado);
+            }while(dependencias[i] < 1 || dependencias[i] > 100);
+        }
         
         //PUNTO 2
         teclado = JOptionPane.showInputDialog(null, "Introduzca la bateria:");
         bateria = Double.parseDouble(teclado);
         
         //PUNTO 3
+        //Modo completo
+        //Variables a usar
+        boolean limpias[] = new boolean[dependencias.length];
+        double bateriaDependencia[] = new double[dependencias.length];
+        for (int i = 0; i < bateriaDependencia.length; i++) {
+            bateriaDependencia[i] = dependencias[i] * 1.5;
+            if(bateria > bateriaDependencia[i]){
+                bateria -= bateriaDependencia[i];
+                limpias[i] = true;
+                System.out.println("Se ha limpiado la habitación: " + i);
+            }else{
+                limpias[i] = false;
+                System.out.println("NO se ha limpiado la habitación: " + i);
+            } 
+        }
+        
+        JOptionPane.showMessageDialog(null, "Se han limpiado las "
+                    + "habitaciones: ");
         
         //Usar booleanos para las dependencias limpiadas
         //En base de carga solo poner 100%
+        /*
+        Saber fecha y hora con LocalDate y LocalTime
+        api java time (8)
+        LocalDateTime
+        */
     }
     
 }
