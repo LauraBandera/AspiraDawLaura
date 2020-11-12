@@ -17,7 +17,7 @@ public class aspiradora {
     //Declaramos las variables que vayamos a usar
     static double bateria;
     static String teclado;
-    static int posicion;
+    static int posicionAspiradora; 
     static String uPredeterminado = "usuario", cPredeterminada = "usuario";
     static double dependencias[];
 
@@ -218,6 +218,7 @@ public class aspiradora {
                 bateria -= bateriaDependencia[hab];
                 limpias[hab] = true;
                 System.out.println("Se ha limpiado la habitación: " + hab);
+                posicionAspiradora = hab;
         } else {
                 limpias[hab] = false;
                 System.out.println("No tiene suficiente"
@@ -237,7 +238,7 @@ public class aspiradora {
 
         String estadoGeneral = "La hora y fecha de hoy es: " + localDateTime
                 + "\nEl nivel de batería es: " + bateria + "\nEl lugar donde se "
-                + "encuentra es la habitacion " + posicion
+                + "encuentra es la habitacion " + posicionAspiradora
                 + "\nEl número de dependencias es: "+ dependencias.length 
                 + "\nLos metros cuadrados de la casa son: " + metros;
         JOptionPane.showMessageDialog(null, estadoGeneral);
