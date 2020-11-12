@@ -49,7 +49,7 @@ public class aspiradora {
         double bateriaDependencia[] = new double[dependencias.length];
         for (int i = 0; i < bateriaDependencia.length; i++) {
             bateriaDependencia[i] = dependencias[i] * 1.5;
-            if (bateria > bateriaDependencia[i]) {
+            if (bateria > bateriaDependencia[i] && bateria > 3) {
                 bateria -= bateriaDependencia[i];
                 limpias[i] = true;
                 System.out.println("Se ha limpiado la habitación: " + i);
@@ -85,7 +85,7 @@ public class aspiradora {
                         + "de habitación a limpiar");
                 limpiar = Integer.parseInt(teclado);
                 //Código repetido meter en un método (línea 52)
-                if (bateria > bateriaDependencia[limpiar]) {
+                if (bateria > bateriaDependencia[limpiar] && bateria > 3) {
                     bateria -= bateriaDependencia[limpiar];
                     limpias[limpiar] = true;
                     System.out.println("Se ha limpiado la habitación: " + limpiar);
