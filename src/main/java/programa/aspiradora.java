@@ -45,10 +45,11 @@ public class aspiradora {
         //PUNTO 3
         //Modo completo
         //Variables a usar
+        final double BATERIA = 1.5;
         boolean limpias[] = new boolean[dependencias.length];
         double bateriaDependencia[] = new double[dependencias.length];
         for (int i = 0; i < bateriaDependencia.length; i++) {
-            bateriaDependencia[i] = dependencias[i] * 1.5;
+            bateriaDependencia[i] = dependencias[i] * BATERIA;
             if (bateria > bateriaDependencia[i] && bateria > 3) {
                 bateria -= bateriaDependencia[i];
                 limpias[i] = true;
@@ -96,6 +97,13 @@ public class aspiradora {
             }
         } while (limpiar != 2);
 
+        //PUNTO 4
+        final double BATERIA_AYF = 2.25;
+        //añadir método para hacer lo mismo qe anteriormente
+        
+        //PUNTO 5
+        
+        
         //Usar booleanos para las dependencias limpiadas
         //En base de carga solo poner 100%
         /*
