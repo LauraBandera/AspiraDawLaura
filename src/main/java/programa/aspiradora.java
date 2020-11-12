@@ -74,13 +74,13 @@ public class aspiradora {
 
         //Modo dependencias
         //Variables a usar
-        int limpiar;
+        int limpiar, posicion = 0;
         do {
             do {
                 teclado = JOptionPane.showInputDialog(null, "¿Desea limpiar alguna "
                         + "habitación? \nIntroduzca:\n1 - Sí\n2 - No");
                 limpiar = Integer.parseInt(teclado);
-            } while (limpiar != 1 || limpiar != 2);
+            } while (limpiar != 1 && limpiar != 2);
 
             if (limpiar == 1) {
                 teclado = JOptionPane.showInputDialog(null, "Introduzca el número "
@@ -90,6 +90,7 @@ public class aspiradora {
                 if (bateria > bateriaDependencia[limpiar] && bateria > 3) {
                     bateria -= bateriaDependencia[limpiar];
                     limpias[limpiar] = true;
+                    posicion = limpiar;
                     System.out.println("Se ha limpiado la habitación: " + limpiar);
                 } else {
                     limpias[limpiar] = false;
@@ -104,10 +105,17 @@ public class aspiradora {
 
         //PUNTO 5
         LocalDateTime localDateTime = LocalDateTime.now();
+        double metros = 0;
+        
+        for (int i = 0; i < dependencias.length; i++) {
+            metros += dependencias[i];
+        }
+        
         String estadoGeneral = "La hora y fecha de hoy es: " + localDateTime
                 + "\nEl nivel de batería es: " + bateria + "\nEl lugar donde se "
-                + "encuentra ";//añadir donde se encuentra parado y dependencias 
-        //y metros de la casa
+                + "encuentra " + posicion + " el número de dependencias es: " 
+                + dependencias.length + " los metros cuadrados de la casa son: " 
+                + metros;
         JOptionPane.showMessageDialog(null, estadoGeneral);
 
         //Usar booleanos para las dependencias limpiadas
