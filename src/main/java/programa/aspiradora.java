@@ -73,29 +73,28 @@ public class aspiradora {
         //Modo dependencias
         //Variables a usar
         int limpiar;
-        do{
+        do {
             do {
-            teclado = JOptionPane.showInputDialog(null, "¿Desea limpiar alguna "
-                    + "habitación? \nIntroduzca:\n1 - Sí\n2 - No");
-            limpiar = Integer.parseInt(teclado);
-        } while (limpiar != 1 || limpiar != 2);
+                teclado = JOptionPane.showInputDialog(null, "¿Desea limpiar alguna "
+                        + "habitación? \nIntroduzca:\n1 - Sí\n2 - No");
+                limpiar = Integer.parseInt(teclado);
+            } while (limpiar != 1 || limpiar != 2);
 
-        if (limpiar == 1) {
-            teclado = JOptionPane.showInputDialog(null, "Introduzca el número "
-                    + "de habitación a limpiar");
-            limpiar = Integer.parseInt(teclado);
-            //Código repetido meter en un método (línea 52)
-            if (bateria > bateriaDependencia[limpiar]) {
-                bateria -= bateriaDependencia[limpiar];
-                limpias[limpiar] = true;
-                System.out.println("Se ha limpiado la habitación: " + limpiar);
-            } else {
-                limpias[limpiar] = false;
-                System.out.println("NO se ha limpiado la habitación: " + limpiar);
+            if (limpiar == 1) {
+                teclado = JOptionPane.showInputDialog(null, "Introduzca el número "
+                        + "de habitación a limpiar");
+                limpiar = Integer.parseInt(teclado);
+                //Código repetido meter en un método (línea 52)
+                if (bateria > bateriaDependencia[limpiar]) {
+                    bateria -= bateriaDependencia[limpiar];
+                    limpias[limpiar] = true;
+                    System.out.println("Se ha limpiado la habitación: " + limpiar);
+                } else {
+                    limpias[limpiar] = false;
+                    System.out.println("NO se ha limpiado la habitación: " + limpiar);
+                }
             }
-        }
-        }while(limpiar != 2);
-        
+        } while (limpiar != 2);
 
         //Usar booleanos para las dependencias limpiadas
         //En base de carga solo poner 100%
