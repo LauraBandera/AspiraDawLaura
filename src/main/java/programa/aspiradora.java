@@ -9,7 +9,6 @@ package programa;
  *
  * @author laura
  */
-
 import javax.swing.JOptionPane;
 
 public class aspiradora {
@@ -19,30 +18,30 @@ public class aspiradora {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+
         //Declaramos las variables que vayamos a usar
         double bateria;
         String teclado;
-        
+
         //Declaración de array para dependencias.
-        teclado = JOptionPane.showInputDialog(null,"Introduzca la cantidad "
+        teclado = JOptionPane.showInputDialog(null, "Introduzca la cantidad "
                 + "de dependencias");
         double dependencias[] = new double[Integer.parseInt(teclado)];
-        
+
         //PUNTO 1
         //Incializamos las variables relativas a las dependencias
         for (int i = 0; i < dependencias.length; i++) {
-            do{
+            do {
                 teclado = JOptionPane.showInputDialog(null, "Introduzca los "
-                    + "metros cuadrados que tiene la dependencia " + i);
-            dependencias[i] = Integer.parseInt(teclado);
-            }while(dependencias[i] < 1 || dependencias[i] > 100);
+                        + "metros cuadrados que tiene la dependencia " + i);
+                dependencias[i] = Integer.parseInt(teclado);
+            } while (dependencias[i] < 1 || dependencias[i] > 100);
         }
-        
+
         //PUNTO 2
         teclado = JOptionPane.showInputDialog(null, "Introduzca la bateria:");
         bateria = Double.parseDouble(teclado);
-        
+
         //PUNTO 3
         //Modo completo
         //Variables a usar
@@ -50,36 +49,61 @@ public class aspiradora {
         double bateriaDependencia[] = new double[dependencias.length];
         for (int i = 0; i < bateriaDependencia.length; i++) {
             bateriaDependencia[i] = dependencias[i] * 1.5;
-            if(bateria > bateriaDependencia[i]){
+            if (bateria > bateriaDependencia[i]) {
                 bateria -= bateriaDependencia[i];
                 limpias[i] = true;
                 System.out.println("Se ha limpiado la habitación: " + i);
-            }else{
+            } else {
                 limpias[i] = false;
                 System.out.println("NO se ha limpiado la habitación: " + i);
-            } 
-            
+            }
         }
         String limpio = "";
         String noLimpio = "";
         for (int i = 0; i < limpias.length; i++) {
-            if(limpias[i]){
+            if (limpias[i]) {
                 limpio += i + " ";
-            }else{
+            } else {
                 noLimpio += i + " ";
             }
         }
-        JOptionPane.showMessageDialog(null,"Las dependencias limpiadas son: " + limpio);
-        JOptionPane.showMessageDialog(null,"Las dependencias NO limpiadas son: " + noLimpio);
+        JOptionPane.showMessageDialog(null, "Las dependencias limpiadas son: " + limpio);
+        JOptionPane.showMessageDialog(null, "Las dependencias NO limpiadas son: " + noLimpio);
+
+        //Modo dependencias
+        //Variables a usar
+        int limpiar;
+        do{
+            do {
+            teclado = JOptionPane.showInputDialog(null, "¿Desea limpiar alguna "
+                    + "habitación? \nIntroduzca:\n1 - Sí\n2 - No");
+            limpiar = Integer.parseInt(teclado);
+        } while (limpiar != 1 || limpiar != 2);
+
+        if (limpiar == 1) {
+            teclado = JOptionPane.showInputDialog(null, "Introduzca el número "
+                    + "de habitación a limpiar");
+            limpiar = Integer.parseInt(teclado);
+            //Código repetido meter en un método (línea 52)
+            if (bateria > bateriaDependencia[limpiar]) {
+                bateria -= bateriaDependencia[limpiar];
+                limpias[limpiar] = true;
+                System.out.println("Se ha limpiado la habitación: " + limpiar);
+            } else {
+                limpias[limpiar] = false;
+                System.out.println("NO se ha limpiado la habitación: " + limpiar);
+            }
+        }
+        }while(limpiar != 2);
         
-        
+
         //Usar booleanos para las dependencias limpiadas
         //En base de carga solo poner 100%
         /*
         Saber fecha y hora con LocalDate y LocalTime
         api java time (8)
         LocalDateTime
-        */
+         */
     }
-    
+
 }
