@@ -9,6 +9,7 @@ package programa;
  *
  * @author laura
  */
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 
 public class aspiradora {
@@ -100,10 +101,15 @@ public class aspiradora {
         //PUNTO 4
         final double BATERIA_AYF = 2.25;
         //añadir método para hacer lo mismo qe anteriormente
-        
+
         //PUNTO 5
-        
-        
+        LocalDateTime localDateTime = LocalDateTime.now();
+        String estadoGeneral = "La hora y fecha de hoy es: " + localDateTime
+                + "\nEl nivel de batería es: " + bateria + "\nEl lugar donde se "
+                + "encuentra ";//añadir donde se encuentra parado y dependencias 
+        //y metros de la casa
+        JOptionPane.showMessageDialog(null, estadoGeneral);
+
         //Usar booleanos para las dependencias limpiadas
         //En base de carga solo poner 100%
         /*
